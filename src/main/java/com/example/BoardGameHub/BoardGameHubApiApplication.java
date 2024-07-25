@@ -15,6 +15,7 @@ public class BoardGameHubApiApplication {
         SpringApplication.run(BoardGameHubApiApplication.class, args);
     }
 
+
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
