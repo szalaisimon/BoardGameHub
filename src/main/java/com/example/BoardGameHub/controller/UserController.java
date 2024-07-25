@@ -27,20 +27,29 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getUsers() {
-        return userService.getAllUsers();
+    public ResponseEntity<List<User>> getUsers() {
+        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
     @GetMapping("/{userId}")
-    public Optional<User> getUser(
+    public ResponseEntity<User> getUser(
         @PathVariable
         Integer userId
     ) {
-        return userService.findById(userId);
+        final Optional<User> userOptional = userService.findById(userId);
+
+        if (userOptional.isPresent()) {
+            return new ResponseEntity<>(userOptional.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping
-    public ResponseEntity<String> createUser(@RequestBody User user) {
+    public ResponseEntity<String> createUser(
+        @RequestBody
+        User user
+    ) {
         boolean success = userService.addNewUser(user);
 
         if (success) {
@@ -53,5 +62,4 @@ public class UserController {
                 .body("Username is already taken");
         }
     }
-
 }
