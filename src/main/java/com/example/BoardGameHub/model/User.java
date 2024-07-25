@@ -11,18 +11,21 @@ import lombok.Data;
 @Table
 public class User {
     @Id
-    @Column(name="ID")
+    @Column(name = "ID")
     private int id;
 
-    @Column(name="firstName")
+    @Column(name = "firstName")
     private String firstName;
 
-    @Column(name="lastName")
+    @Column(name = "lastName")
     private String lastName;
 
-    @Column(name="password")
+    @Column(name = "userName")
+    private String userName;
+
+    @Column(name = "password")
     private String password;
 
-    @Column(name="role")
+    @Column(name = "role")
     private String role;
 }
