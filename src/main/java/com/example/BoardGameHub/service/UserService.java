@@ -26,13 +26,14 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public void addNewUser(final User user) {
+    public boolean addNewUser(final User user) {
         Optional<User> userOptional = userRepository.findStudentByUserName(user.getUserName());
 
         if (userOptional.isPresent()) {
-            throw new IllegalArgumentException("username taken");
+            return false;
         }
 
         userRepository.save(user);
+        return true;
     }
 }

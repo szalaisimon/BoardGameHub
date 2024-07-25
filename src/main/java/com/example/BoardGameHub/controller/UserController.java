@@ -3,6 +3,8 @@ package com.example.BoardGameHub.controller;
 import com.example.BoardGameHub.model.User;
 import com.example.BoardGameHub.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,10 +40,18 @@ public class UserController {
     }
 
     @PostMapping
-    public void createUser(
-        @RequestBody
-        User user
-    ) {
-        userService.addNewUser(user);
+    public ResponseEntity<String> createUser(@RequestBody User user) {
+        boolean success = userService.addNewUser(user);
+
+        if (success) {
+            return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body("User created successfully");
+        } else {
+            return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body("Username is already taken");
+        }
     }
+
 }
