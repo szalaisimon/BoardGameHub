@@ -15,7 +15,6 @@ public class BoardGameHubApiApplication {
         SpringApplication.run(BoardGameHubApiApplication.class, args);
     }
 
-
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -23,9 +22,11 @@ public class BoardGameHubApiApplication {
         corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
         corsConfiguration.setAllowedHeaders(Arrays.asList("Origin", "Access-Control-Allow-Origin",
             "Content-Type", "Accept", "Authorization", "X-Requested-With", "Access-Control-Request-Method",
-            "Access-Control-Request-Headers"));
+            "Access-Control-Request-Headers"
+        ));
         corsConfiguration.setExposedHeaders(Arrays.asList("Origin", "Accept", "Content-Type", "Authorization",
-            "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
+            "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"
+        ));
         corsConfiguration.setAllowedMethods(Arrays.asList("GET", "PUT", "DELETE", "POST", "OPTIONS"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfiguration);

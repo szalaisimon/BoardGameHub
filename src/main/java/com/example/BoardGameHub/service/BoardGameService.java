@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BoardGameService {
@@ -16,7 +17,11 @@ public class BoardGameService {
         this.repository = repository;
     }
 
-    public List<BoardGame> getAllBoardGames(){
+    public List<BoardGame> getAllBoardGames() {
         return repository.findAll();
+    }
+
+    public Optional<BoardGame> findById(final int boardGameId) {
+        return repository.findById(boardGameId);
     }
 }
