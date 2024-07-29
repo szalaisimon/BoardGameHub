@@ -27,7 +27,7 @@ public class UserService {
     }
 
     public boolean addNewUser(final User user) {
-        Optional<User> userOptional = userRepository.findStudentByUserName(user.getUserName());
+        Optional<User> userOptional = userRepository.findByUsername(user.getUsername());
 
         if (userOptional.isPresent()) {
             return false;
