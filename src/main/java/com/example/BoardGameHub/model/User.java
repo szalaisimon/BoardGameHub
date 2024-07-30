@@ -21,6 +21,7 @@ import java.util.List;
 public class User implements UserDetails {
     @Id
     @Column(name = "ID")
+    @GeneratedValue
     private int id;
 
     @Column(name = "firstName")
@@ -29,8 +30,8 @@ public class User implements UserDetails {
     @Column(name = "lastName")
     private String lastName;
 
-    @Column(name = "userName")
-    private String userName;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "password")
     private String password;
@@ -46,7 +47,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     @Override
