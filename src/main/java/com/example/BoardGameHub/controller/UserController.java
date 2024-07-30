@@ -44,22 +44,4 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-    @PostMapping
-    public ResponseEntity<String> createUser(
-        @RequestBody
-        User user
-    ) {
-        boolean success = userService.addNewUser(user);
-
-        if (success) {
-            return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body("User created successfully");
-        } else {
-            return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body("Username is already taken");
-        }
-    }
 }

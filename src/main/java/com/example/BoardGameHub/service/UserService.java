@@ -25,15 +25,4 @@ public class UserService {
     public Optional<User> findById(final Integer id) {
         return userRepository.findById(id);
     }
-
-    public boolean addNewUser(final User user) {
-        Optional<User> userOptional = userRepository.findByUsername(user.getUsername());
-
-        if (userOptional.isPresent()) {
-            return false;
-        }
-
-        userRepository.save(user);
-        return true;
-    }
 }
