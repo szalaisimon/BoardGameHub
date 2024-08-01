@@ -1,6 +1,5 @@
 package com.example.BoardGameHub.auth;
 
-import com.example.BoardGameHub.model.RoleEnum;
 import com.example.BoardGameHub.model.User;
 import com.example.BoardGameHub.repository.UserRepository;
 import com.example.BoardGameHub.service.JwtService;
@@ -24,7 +23,7 @@ public class AuthenticationService {
             .lastName(request.getLastName())
             .username(request.getUsername())
             .password(passwordEncoder.encode(request.getPassword()))
-            .role(RoleEnum.USER)
+            .role(request.getRole())
             .build();
 
         repository.save(user);

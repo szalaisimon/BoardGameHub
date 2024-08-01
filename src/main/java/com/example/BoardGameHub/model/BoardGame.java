@@ -40,4 +40,7 @@ public class BoardGame {
     @Enumerated(EnumType.STRING)
     @Column(name = "category")
     private BoardGameCategoryEnum category;
+
+    @Column(name = "picture")
+    private String picture;
 }

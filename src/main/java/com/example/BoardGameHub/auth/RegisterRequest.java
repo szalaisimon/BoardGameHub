@@ -1,5 +1,6 @@
 package com.example.BoardGameHub.auth;
 
+import com.example.BoardGameHub.model.RoleEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,4 +15,5 @@ public class RegisterRequest {
     private String lastName;
     private String username;
     private String password;
+    private RoleEnum role;
 }
