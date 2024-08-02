@@ -4,6 +4,7 @@ import com.example.BoardGameHub.model.RoleEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,23 +27,23 @@ public class SecurityConfiguration {
         "/api/boardgames/**",
         "/api/boardgames",
         "/api/auth/**",
+        "/api/boardgames/{id}/reviews"
     };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(req ->
-                req.requestMatchers(WHITE_LIST_URL)
-                    .permitAll()
-                    .requestMatchers("/api/users").hasAuthority(RoleEnum.ADMIN.toString())
-                    .requestMatchers("/api/users/**").authenticated()
-                    .anyRequest()
-                    .authenticated())
+            .authorizeHttpRequests(req -> req
+                .requestMatchers(HttpMethod.POST, "/api/boardgames").hasAuthority(RoleEnum.ADMIN.toString())
+                .requestMatchers(HttpMethod.POST, "/api/boardgames/{id}/reviews").authenticated()
+                .requestMatchers("/api/users").hasAuthority(RoleEnum.ADMIN.toString())
+                .requestMatchers("/api/users/**").authenticated()
+                .requestMatchers(WHITE_LIST_URL).permitAll()
+                .anyRequest().authenticated())
             .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
             .authenticationProvider(authenticationProvider)
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-        ;
+            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

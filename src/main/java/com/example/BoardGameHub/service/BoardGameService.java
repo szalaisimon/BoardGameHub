@@ -21,7 +21,11 @@ public class BoardGameService {
         return repository.findAll();
     }
 
-    public Optional<BoardGame> findById(final int boardGameId) {
+    public Optional<BoardGame> findById(final Long boardGameId) {
         return repository.findById(boardGameId);
+    }
+
+    public void createNewBoardGame(BoardGame boardGame) {
+        repository.save(boardGame);
     }
 }
